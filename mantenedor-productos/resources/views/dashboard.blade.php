@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layouts.app')
 
-    <title>Dashboard</title>
+@section('contenido')
 
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+<div class="card">
 
-</head>
-<body>
+    <div class="card-header">
 
-<h1>Dashboard</h1>
+        Dashboard
 
-<p>
-Bienvenido {{ session('usuario') }}
-</p>
+    </div>
 
-<a href="{{ route('productos.index') }}">
-    Mantenedor Productos
-</a>
+    <div class="card-body">
 
-<form action="{{ route('logout') }}" method="POST">
+        <h3>Bienvenido al CRM de la Funeraria</h3>
 
-    @csrf
+        <p>
 
-    <button type="submit">
-        Cerrar Sesión
-    </button>
+            Desde aquí puedes administrar
+            planes y servicios funerarios.
 
-</form>
+        </p>
 
-</body>
-</html>
+    </div>
+
+</div>
+
+@endsection
