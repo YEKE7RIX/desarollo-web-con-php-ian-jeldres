@@ -125,6 +125,7 @@
 </div>
 
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/productos.js') }}"></script>
 
 </body>
 </html>

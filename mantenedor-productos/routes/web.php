@@ -38,3 +38,11 @@ Route::post('/productos',[ProductoController::class,'store'])
 Route::patch('/productos/{producto}/estado',
 [ProductoController::class,'cambiarEstado'])
 ->name('productos.estado');
+
+Route::get('/productos/{producto}/editar',
+[ProductoController::class,'edit'])
+->name('productos.edit');
+
+Route::put('/productos/{producto}',
+[ProductoController::class,'update'])
+->name('productos.update');

@@ -1,35 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    document.querySelectorAll('.btnEstado')
-        .forEach(btn => {
+    document.querySelectorAll('.cambiar-estado')
+    .forEach(btn => {
 
-            btn.addEventListener('click', () => {
+        btn.addEventListener('click', () => {
 
-                const id = btn.dataset.id;
+            const id = btn.dataset.id;
 
-                fetch(`/productos/${id}/estado`, {
+            fetch(`/productos/${id}/estado`, {
 
-                    method: 'PATCH',
+                method: 'PATCH',
 
-                    headers: {
+                headers: {
 
-                        'X-CSRF-TOKEN':
-                        document.querySelector(
-                        'meta[name="csrf-token"]')
-                        ?.content || ''
+                    'X-CSRF-TOKEN':
+                    document.querySelector(
+                    'meta[name="csrf-token"]'
+                    ).content,
 
-                    }
+                    'Accept': 'application/json'
 
-                })
+                }
 
-                .then(() => {
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                if(data.success){
 
                     location.reload();
 
-                });
+                }
 
             });
 
         });
+
+    });
 
 });

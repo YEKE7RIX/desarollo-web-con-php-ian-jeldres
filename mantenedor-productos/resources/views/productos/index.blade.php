@@ -76,7 +76,7 @@
                     <td>
 
                     <button
-                    class="btn btn-warning btn-sm cambiar-estado
+                    class="btn btn-sm cambiar-estado
                     {{ $producto->estado ? 'btn-danger' : 'btn-success' }}"
                     data-id="{{ $producto->id }}"
                     data-estado="{{ $producto->estado }}">
@@ -84,8 +84,9 @@
                     {{ $producto->estado ? 'Desactivar' : 'Activar' }}
                 </button>
 
-                <a href="{{ route('productos.edit', $producto->id) }}"
-                   class="btn btn-primary btn-sm">
+                <a 
+                href="{{ route('productos.edit', $producto->id) }}"
+                class="btn btn-primary btn-sm">
                     Editar
                 </a>
 
