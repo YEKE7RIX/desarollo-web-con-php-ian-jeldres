@@ -1,59 +1,181 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mantenedor de Productos y Precios Funerarios
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web desarrollado con Laravel para administrar el catálogo comercial de productos y planes funerarios, incluyendo control de estado e historial de precios.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* Inicio de sesión y control de acceso mediante sesiones.
+* Redirección automática según el estado de la sesión.
+* Cierre de sesión con invalidación de sesión y cookie.
+* Dashboard con cantidad total de productos, activos e inactivos.
+* Listado de productos y planes funerarios.
+* Registro de nuevos productos.
+* Edición de productos existentes.
+* Activación y desactivación sin eliminación física.
+* Búsqueda por nombre y categoría.
+* Validaciones del lado del servidor en español.
+* Categorías controladas mediante listas desplegables.
+* Administración del precio vigente.
+* Registro histórico de precios.
+* Formato monetario en pesos chilenos, CLP.
+* Interfaz basada en AdminLTE 4.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologías utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* PHP 8.2
+* Laravel 12
+* MySQL / MariaDB
+* HTML5
+* CSS3
+* JavaScript
+* Fetch API
+* AdminLTE 4
+* XAMPP
+* Composer
 
-## Learning Laravel
+## Requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+* PHP 8.2 o superior.
+* Composer.
+* MySQL o MariaDB.
+* XAMPP, Laragon o un entorno equivalente.
+* Extensiones de PHP requeridas por Laravel.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalación
 
-## Laravel Sponsors
+### 1. Copiar o clonar el proyecto
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ubicar el proyecto dentro de la carpeta del servidor local. Por ejemplo:
 
-### Premium Partners
+```text
+C:\xampp\htdocs\
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Instalar las dependencias
 
-## Contributing
+Desde la carpeta del proyecto ejecutar:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```powershell
+composer install
+```
 
-## Code of Conduct
+### 3. Crear el archivo de entorno
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+En Windows:
 
-## Security Vulnerabilities
+```powershell
+copy .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Generar la clave de Laravel
 
-## License
+```powershell
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Crear la base de datos
+
+Iniciar Apache y MySQL desde XAMPP.
+
+Crear en phpMyAdmin una base de datos llamada:
+
+```text
+mantenedor_productos
+```
+
+### 6. Importar el archivo SQL
+
+Importar en la base de datos el archivo:
+
+```text
+mantenedor_productos.sql
+```
+
+El archivo incluye la estructura de las tablas y los datos utilizados para las pruebas.
+
+No es necesario ejecutar `php artisan migrate` después de importar el archivo SQL completo.
+
+### 7. Limpiar la configuración almacenada
+
+```powershell
+php artisan optimize:clear
+```
+
+### 8. Iniciar el proyecto
+
+```powershell
+php artisan serve
+```
+
+Abrir en el navegador:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Credenciales de acceso
+
+```text
+Correo: admin@crm.cl
+Contraseña: 123456
+```
+
+## Configuración de la base de datos
+
+El archivo `.env.example` está configurado para utilizar MySQL:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mantenedor_productos
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Entidades principales
+
+### Productos
+
+Contiene la información general del catálogo:
+
+* Nombre.
+* Categoría.
+* Precio vigente.
+* Stock.
+* Descripción.
+* Estado activo o inactivo.
+
+### Precios de producto
+
+Mantiene el historial de precios:
+
+* Producto relacionado.
+* Precio.
+* Fecha de inicio.
+* Fecha de término.
+* Precio vigente o histórico.
+
+## Categorías disponibles
+
+* Planes.
+* Urnas.
+* Lápidas.
+* Flores.
+* Accesorios.
+
+## Control de estado
+
+El sistema no elimina físicamente los productos. Los registros se mantienen en la base de datos y pueden alternarse entre:
+
+* Activo.
+* Inactivo.
+
+El cambio se realiza mediante JavaScript, Fetch API y una petición HTTP PATCH.
+
+## Autor
+
+Ian Andre Jeldres Jofré 
+Ingeniería Civil Informática 7mo semestre
+Asignatura Desarrollo web y aplicaciones moviles
+

@@ -1,40 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    document.querySelectorAll('.cambiar-estado')
-    .forEach(btn => {
+    const botones = document.querySelectorAll('.cambiar-estado');
+    const csrf = document.querySelector('meta[name="csrf-token"]');
 
-        btn.addEventListener('click', () => {
+    if (!csrf) {
+        return;
+    }
 
-            const id = btn.dataset.id;
+    botones.forEach((boton) => {
 
-            fetch(`/productos/${id}/estado`, {
+        boton.addEventListener('click', async () => {
 
-                method: 'PATCH',
+            const id = boton.dataset.id;
 
-                headers: {
+            boton.disabled = true;
 
-                    'X-CSRF-TOKEN':
-                    document.querySelector(
-                    'meta[name="csrf-token"]'
-                    ).content,
+            try {
 
-                    'Accept': 'application/json'
+                const respuesta = await fetch(`/productos/${id}/estado`, {
 
+                    method: 'PATCH',
+
+                    headers: {
+                        'X-CSRF-TOKEN': csrf.content,
+                        'Accept': 'application/json'
+                    }
+
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error('No fue posible cambiar el estado.');
                 }
 
-            })
+                const datos = await respuesta.json();
 
-            .then(response => response.json())
-
-            .then(data => {
-
-                if(data.success){
-
-                    location.reload();
-
+                if (datos.success) {
+                    window.location.reload();
                 }
 
-            });
+            } catch (error) {
+
+                alert('No fue posible cambiar el estado del producto.');
+                boton.disabled = false;
+
+            }
 
         });
 

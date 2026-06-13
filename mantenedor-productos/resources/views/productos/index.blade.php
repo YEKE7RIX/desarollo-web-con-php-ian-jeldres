@@ -4,14 +4,16 @@
 
 <div class="card">
 
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between align-items-center">
 
-        <h3>Catálogo de Productos y Planes Funerarios</h3>
+        <h3 class="mb-0">
+            Catálogo de Productos y Planes Funerarios
+        </h3>
 
         <a href="{{ route('productos.create') }}"
            class="btn btn-success">
 
-           Nuevo Producto
+            Nuevo Producto
 
         </a>
 
@@ -19,119 +21,201 @@
 
     <div class="card-body">
 
-    <form method="GET" action="{{ route('productos.index') }}" class="mb-3">
+        {{-- Mensaje después de crear o actualizar --}}
+        @if (session('success'))
 
-        <div class="row">
-
-            <div class="col-md-10">
-
-                <input
-                    type="text"
-                    name="buscar"
-                    class="form-control"
-                    placeholder="Buscar producto o plan funerario..."
-                    value="{{ $buscar ?? '' }}">
-
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
 
-            <div class="col-md-2">
+        @endif
 
-                <button class="btn btn-primary w-100">
-                    Buscar
-                </button>
+        {{-- Buscador --}}
+        <form method="GET"
+              action="{{ route('productos.index') }}"
+              class="mb-3">
 
-            </div>
+            <div class="row">
 
-        </div>
+                <div class="col-md-9">
 
-    </form>
+                    <input
+                        type="text"
+                        name="buscar"
+                        class="form-control"
+                        placeholder="Buscar producto o plan funerario..."
+                        value="{{ $buscar ?? '' }}">
 
-        <table class="table table-bordered">
+                </div>
 
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-            @foreach($productos as $producto)
-
-                <tr>
-
-                    <td>{{ $producto->id }}</td>
-
-                    <td>{{ $producto->nombre }}</td>
-
-                    <td>{{ $producto->categoria }}</td>
-
-                    <td>{{ number_format((float) $producto->precio, 0, ',', '.') }} CLP</td>
-
-                    <td>{{ $producto->stock }}</td>
-
-                    <td>{{ $producto->descripcion }}</td>
-
-                    <td>
-
-                        @if($producto->estado)
-
-                        <span class="badge bg-success">
-                            Activo
-                        </span>
-
-                        @else
-
-                        <span class="badge bg-danger">
-                            Inactivo
-                        </span>
-
-                        @endif
-
-                    </td>
-                    <td>
+                <div class="col-md-2">
 
                     <button
-                    class="btn btn-sm cambiar-estado
-                    {{ $producto->estado ? 'btn-danger' : 'btn-success' }}"
-                    data-id="{{ $producto->id }}"
-                    data-estado="{{ $producto->estado }}">
-                    
-                    {{ $producto->estado ? 'Desactivar' : 'Activar' }}
-                </button>
+                        type="submit"
+                        class="btn btn-primary w-100">
 
-                <a 
-                href="{{ route('productos.edit', $producto->id) }}"
-                class="btn btn-primary btn-sm">
-                    Editar
-                </a>
+                        Buscar
 
-                <a
-                href="{{ route('precios.index',$producto->id) }}"
-                class="btn btn-info btn-sm">
-                    Precios
-                </a>
+                    </button>
 
-                    </td>
+                </div>
 
-                </tr>
+                <div class="col-md-1">
 
-            @endforeach
+                    <a href="{{ route('productos.index') }}"
+                       class="btn btn-secondary w-100">
 
-            </tbody>
+                        Limpiar
 
-        </table>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @forelse ($productos as $producto)
+
+                        <tr>
+
+                            <td>
+                                {{ $producto->id }}
+                            </td>
+
+                            <td>
+                                {{ $producto->nombre }}
+                            </td>
+
+                            <td>
+                                {{ $producto->categoria }}
+                            </td>
+
+                            <td>
+                                {{ number_format(
+                                    (float) $producto->precio,
+                                    0,
+                                    ',',
+                                    '.'
+                                ) }} CLP
+                            </td>
+
+                            <td>
+                                {{ $producto->stock }}
+                            </td>
+
+                            <td>
+                                {{ $producto->descripcion }}
+                            </td>
+
+                            <td>
+
+                                @if ($producto->estado)
+
+                                    <span class="badge bg-success">
+                                        Activo
+                                    </span>
+
+                                @else
+
+                                    <span class="badge bg-danger">
+                                        Inactivo
+                                    </span>
+
+                                @endif
+
+                            </td>
+
+                            <td>
+
+                                <div class="d-flex gap-1 flex-wrap">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm cambiar-estado
+                                        {{ $producto->estado
+                                            ? 'btn-danger'
+                                            : 'btn-success' }}"
+                                        data-id="{{ $producto->id }}"
+                                        data-estado="{{ $producto->estado }}">
+
+                                        {{ $producto->estado
+                                            ? 'Desactivar'
+                                            : 'Activar' }}
+
+                                    </button>
+
+                                    <a
+                                        href="{{ route(
+                                            'productos.edit',
+                                            $producto->id
+                                        ) }}"
+                                        class="btn btn-primary btn-sm">
+
+                                        Editar
+
+                                    </a>
+
+                                    <a
+                                        href="{{ route(
+                                            'precios.index',
+                                            $producto->id
+                                        ) }}"
+                                        class="btn btn-info btn-sm">
+
+                                        Precios
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+
+                            <td colspan="8"
+                                class="text-center py-4">
+
+                                No se encontraron productos o planes funerarios.
+
+                            </td>
+
+                        </tr>
+
+                    @endforelse
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

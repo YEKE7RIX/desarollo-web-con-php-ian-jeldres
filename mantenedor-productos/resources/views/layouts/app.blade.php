@@ -8,7 +8,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>CRM Funeraria</title>
+    <title>CRM Funeraria | Productos y Precios</title>
 
     <link rel="stylesheet"
           href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
@@ -94,7 +94,7 @@
                         <a href="{{ route('productos.index') }}"
                            class="nav-link">
 
-                            Planes y Servicios
+                            Productos y Precios
 
                         </a>
 
