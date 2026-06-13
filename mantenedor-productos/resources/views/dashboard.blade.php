@@ -10,9 +10,9 @@
 
             <div class="inner">
 
-                <h3>{{ \App\Models\Producto::count() }}</h3>
+                <h3>{{ $totalProductos }}</h3>
 
-                <p>Total Productos y Planes</p>
+                <p>Total Productos</p>
 
             </div>
 
@@ -26,9 +26,9 @@
 
             <div class="inner">
 
-                <h3>{{ \App\Models\Producto::where('estado',1)->count() }}</h3>
+                <h3>{{ $productosActivos }}</h3>
 
-                <p>Activos</p>
+                <p>Productos Activos</p>
 
             </div>
 
@@ -42,9 +42,9 @@
 
             <div class="inner">
 
-                <h3>{{ \App\Models\Producto::where('estado',0)->count() }}</h3>
+                <h3>{{ $productosInactivos }}</h3>
 
-                <p>Inactivos</p>
+                <p>Productos Inactivos</p>
 
             </div>
 

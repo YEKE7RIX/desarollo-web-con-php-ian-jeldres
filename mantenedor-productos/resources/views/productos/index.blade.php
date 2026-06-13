@@ -19,6 +19,33 @@
 
     <div class="card-body">
 
+    <form method="GET" action="{{ route('productos.index') }}" class="mb-3">
+
+        <div class="row">
+
+            <div class="col-md-10">
+
+                <input
+                    type="text"
+                    name="buscar"
+                    class="form-control"
+                    placeholder="Buscar producto o plan funerario..."
+                    value="{{ $buscar ?? '' }}">
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button class="btn btn-primary w-100">
+                    Buscar
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
         <table class="table table-bordered">
 
             <thead>

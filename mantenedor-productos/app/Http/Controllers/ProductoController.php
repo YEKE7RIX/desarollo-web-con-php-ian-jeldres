@@ -7,15 +7,31 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if(!session()->has('usuario')){
             return redirect()->route('login');
         }
 
-        $productos = Producto::all();
+        $buscar = $request->buscar;
 
-        return view('productos.index', compact('productos'));
+        $productos = Producto::when($buscar, function($query) use ($buscar){
+
+            $query->where(
+                'nombre',
+                'like',
+                '%' . $buscar . '%'
+            );
+
+        })->get();
+
+        return view(
+            'productos.index',
+            compact(
+                'productos',
+                'buscar'
+            )
+        );
     }
 
     public function create()
@@ -29,6 +45,26 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|max:100',
+            'categoria' => 'required|max:50',
+            'precio' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'descripcion' => 'required|max:255'
+        ], [
+            'nombre.required' => 'Debe ingresar el nombre del producto.',
+            'nombre.max' => 'El nombre no puede superar los 100 caracteres.',
+            'categoria.required' => 'Debe seleccionar una categoría.',
+            'categoria.max' => 'La categoría es demasiado larga.',
+            'precio.required' => 'Debe ingresar un precio.',
+            'precio.numeric' => 'El precio debe ser numérico.',
+            'precio.min' => 'El precio no puede ser negativo.',
+            'stock.required' => 'Debe ingresar stock.',
+            'stock.integer' => 'El stock debe ser un número entero.',
+            'stock.min' => 'El stock no puede ser negativo.',
+            'descripcion.required' => 'Debe ingresar una descripción.',
+            'descripcion.max' => 'La descripción no puede superar los 255 caracteres.'
+        ]);
         Producto::create([
 
             'nombre' => $request->nombre,
@@ -55,23 +91,36 @@ class ProductoController extends Controller
             'success' => true
         ]);
     }
+
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
 
-        return view('productos.edit', compact('producto'));
+        return view(
+            'productos.edit',
+            compact('producto')
+        );
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nombre' => 'required|max:100',
+            'categoria' => 'required|max:50',
+            'precio' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'descripcion' => 'required|max:255'
+        ]);
         $producto = Producto::findOrFail($id);
 
         $producto->update([
+
             'nombre' => $request->nombre,
             'categoria' => $request->categoria,
             'precio' => $request->precio,
             'stock' => $request->stock,
             'descripcion' => $request->descripcion
+
         ]);
 
         return redirect()->route('productos.index');

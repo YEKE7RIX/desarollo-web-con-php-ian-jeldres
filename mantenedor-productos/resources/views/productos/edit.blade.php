@@ -12,8 +12,26 @@
 
     <div class="card-body">
 
+        @if ($errors->any())
+
+            <div class="alert alert-danger">
+
+                <ul class="mb-0">
+
+                    @foreach ($errors->all() as $error)
+
+                        <li>{{ $error }}</li>
+
+                    @endforeach
+
+                </ul>
+
+            </div>
+
+        @endif
+
         <form
-        action="{{ route('productos.update',$producto->id) }}"
+        action="{{ route('productos.update', $producto->id) }}"
         method="POST">
 
             @csrf
@@ -21,68 +39,130 @@
 
             <div class="mb-3">
 
-                <label>Nombre</label>
+                <label class="form-label">
+
+                    Nombre
+
+                </label>
 
                 <input
                 type="text"
                 name="nombre"
                 class="form-control"
-                value="{{ $producto->nombre }}">
+                value="{{ $producto->nombre }}"
+                required>
 
             </div>
 
             <div class="mb-3">
 
-                <label>Categoría</label>
+                <label class="form-label">
 
-                <input
-                type="text"
+                    Categoría
+
+                </label>
+
+                <select
                 name="categoria"
                 class="form-control"
-                value="{{ $producto->categoria }}">
+                required>
+
+                    <option value="Planes"
+                    {{ $producto->categoria == 'Planes' ? 'selected' : '' }}>
+                        Planes
+                    </option>
+
+                    <option value="Urnas"
+                    {{ $producto->categoria == 'Urnas' ? 'selected' : '' }}>
+                        Urnas
+                    </option>
+
+                    <option value="Lápidas"
+                    {{ $producto->categoria == 'Lápidas' ? 'selected' : '' }}>
+                        Lápidas
+                    </option>
+
+                    <option value="Flores"
+                    {{ $producto->categoria == 'Flores' ? 'selected' : '' }}>
+                        Flores
+                    </option>
+
+                    <option value="Accesorios"
+                    {{ $producto->categoria == 'Accesorios' ? 'selected' : '' }}>
+                        Accesorios
+                    </option>
+
+                </select>
 
             </div>
 
             <div class="mb-3">
 
-                <label>Precio</label>
+                <label class="form-label">
+
+                    Precio
+
+                </label>
 
                 <input
                 type="number"
                 name="precio"
                 class="form-control"
-                value="{{ $producto->precio }}">
+                value="{{ $producto->precio }}"
+                min="0"
+                required>
 
             </div>
 
             <div class="mb-3">
 
-                <label>Stock</label>
+                <label class="form-label">
+
+                    Stock
+
+                </label>
 
                 <input
                 type="number"
                 name="stock"
                 class="form-control"
-                value="{{ $producto->stock }}">
+                value="{{ $producto->stock }}"
+                min="0"
+                required>
 
             </div>
 
             <div class="mb-3">
 
-                <label>Descripción</label>
+                <label class="form-label">
+
+                    Descripción
+
+                </label>
 
                 <textarea
                 name="descripcion"
-                class="form-control">{{ $producto->descripcion }}</textarea>
+                class="form-control"
+                rows="3"
+                required>{{ $producto->descripcion }}</textarea>
 
             </div>
 
             <button
+            type="submit"
             class="btn btn-success">
 
-            Guardar Cambios
+                Guardar Cambios
 
             </button>
+
+            <a
+            href="{{ route('productos.index') }}"
+            class="btn btn-secondary">
+
+                Volver
+
+            </a>
 
         </form>
 
