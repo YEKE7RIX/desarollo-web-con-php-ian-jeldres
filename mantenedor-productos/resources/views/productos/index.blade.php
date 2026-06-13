@@ -77,7 +77,7 @@
 
                     <td>{{ $producto->categoria }}</td>
 
-                    <td>${{ $producto->precio }}</td>
+                    <td>{{ number_format((float) $producto->precio, 0, ',', '.') }} CLP</td>
 
                     <td>{{ $producto->stock }}</td>
 
@@ -115,6 +115,12 @@
                 href="{{ route('productos.edit', $producto->id) }}"
                 class="btn btn-primary btn-sm">
                     Editar
+                </a>
+
+                <a
+                href="{{ route('precios.index',$producto->id) }}"
+                class="btn btn-info btn-sm">
+                    Precios
                 </a>
 
                     </td>

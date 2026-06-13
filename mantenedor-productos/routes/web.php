@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PrecioProductoController;
 
 Route::get('/', function () {
 
@@ -46,3 +47,11 @@ Route::get('/productos/{producto}/editar',
 Route::put('/productos/{producto}',
 [ProductoController::class,'update'])
 ->name('productos.update');
+
+Route::get('/productos/{producto}/precios',
+[PrecioProductoController::class,'index'])
+->name('precios.index');
+
+Route::post('/productos/{producto}/precios',
+[PrecioProductoController::class,'store'])
+->name('precios.store');
