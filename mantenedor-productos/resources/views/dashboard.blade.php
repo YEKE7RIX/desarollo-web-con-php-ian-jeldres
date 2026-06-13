@@ -2,24 +2,53 @@
 
 @section('contenido')
 
-<div class="card">
+<div class="row">
 
-    <div class="card-header">
+    <div class="col-lg-4">
 
-        Dashboard
+        <div class="small-box text-bg-primary">
+
+            <div class="inner">
+
+                <h3>{{ \App\Models\Producto::count() }}</h3>
+
+                <p>Total Productos y Planes</p>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-body">
+    <div class="col-lg-4">
 
-        <h3>Bienvenido al CRM de la Funeraria</h3>
+        <div class="small-box text-bg-success">
 
-        <p>
+            <div class="inner">
 
-            Desde aquí puedes administrar
-            planes y servicios funerarios.
+                <h3>{{ \App\Models\Producto::where('estado',1)->count() }}</h3>
 
-        </p>
+                <p>Activos</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="small-box text-bg-danger">
+
+            <div class="inner">
+
+                <h3>{{ \App\Models\Producto::where('estado',0)->count() }}</h3>
+
+                <p>Inactivos</p>
+
+            </div>
+
+        </div>
 
     </div>
 

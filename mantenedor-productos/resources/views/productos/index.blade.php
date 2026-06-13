@@ -6,12 +6,12 @@
 
     <div class="card-header d-flex justify-content-between">
 
-        <h3>Planes y Servicios Funerarios</h3>
+        <h3>Catálogo de Productos y Planes Funerarios</h3>
 
         <a href="{{ route('productos.create') }}"
            class="btn btn-success">
 
-           Nuevo Servicio
+           Nuevo Producto
 
         </a>
 

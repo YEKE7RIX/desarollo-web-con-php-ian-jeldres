@@ -5,7 +5,9 @@
 <div class="card">
 
     <div class="card-header">
-        Nuevo Producto
+
+        <h3>Nuevo Producto o Plan Funerario</h3>
+
     </div>
 
     <div class="card-body">
@@ -17,7 +19,11 @@
 
             <div class="mb-3">
 
-                <label>Nombre</label>
+                <label class="form-label">
+
+                    Nombre
+
+                </label>
 
                 <input
                     type="text"
@@ -29,19 +35,33 @@
 
             <div class="mb-3">
 
-                <label>Categoría</label>
+                <label class="form-label">
 
-                <input
-                    type="text"
+                    Categoría
+
+                </label>
+
+                <select
                     name="categoria"
-                    class="form-control"
-                    required>
+                    class="form-control">
+
+                    <option>Planes</option>
+                    <option>Urnas</option>
+                    <option>Lápidas</option>
+                    <option>Flores</option>
+                    <option>Accesorios</option>
+
+                </select>
 
             </div>
 
             <div class="mb-3">
 
-                <label>Precio</label>
+                <label class="form-label">
+
+                    Precio
+
+                </label>
 
                 <input
                     type="number"
@@ -53,7 +73,11 @@
 
             <div class="mb-3">
 
-                <label>Stock</label>
+                <label class="form-label">
+
+                    Stock
+
+                </label>
 
                 <input
                     type="number"
@@ -65,7 +89,11 @@
 
             <div class="mb-3">
 
-                <label>Descripción</label>
+                <label class="form-label">
+
+                    Descripción
+
+                </label>
 
                 <textarea
                     name="descripcion"
@@ -75,11 +103,18 @@
 
             <button
                 type="submit"
-                class="btn btn-primary">
+                class="btn btn-success">
 
                 Guardar
 
             </button>
+
+            <a href="{{ route('productos.index') }}"
+               class="btn btn-secondary">
+
+               Volver
+
+            </a>
 
         </form>
 
