@@ -30,7 +30,9 @@
                     <th>Categoría</th>
                     <th>Precio</th>
                     <th>Stock</th>
+                    <th>Descripción</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
 
                 </tr>
 
@@ -52,17 +54,40 @@
 
                     <td>{{ $producto->stock }}</td>
 
+                    <td>{{ $producto->descripcion }}</td>
+
                     <td>
 
                         @if($producto->estado)
 
+                        <span class="badge bg-success">
                             Activo
+                        </span>
 
                         @else
 
+                        <span class="badge bg-danger">
                             Inactivo
+                        </span>
 
                         @endif
+
+                    </td>
+                    <td>
+
+                    <button
+                    class="btn btn-warning btn-sm cambiar-estado
+                    {{ $producto->estado ? 'btn-danger' : 'btn-success' }}"
+                    data-id="{{ $producto->id }}"
+                    data-estado="{{ $producto->estado }}">
+                    
+                    {{ $producto->estado ? 'Desactivar' : 'Activar' }}
+                </button>
+
+                <a href="{{ route('productos.edit', $producto->id) }}"
+                   class="btn btn-primary btn-sm">
+                    Editar
+                </a>
 
                     </td>
 
