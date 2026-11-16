@@ -1,4 +1,4 @@
-# desarollo-web-con-php-ian-jeldres
+# desarrollo-web-con-php-ian-jeldres
 Desarrollo web con PHP
 
 Necesitamos Instalar:
